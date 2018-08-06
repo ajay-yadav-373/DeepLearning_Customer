@@ -11,15 +11,3 @@ resource "azurerm_public_ip" "pipforlbone" {
   public_ip_address_allocation = "static"
   resource_group_name   = "${azurerm_resource_group.deep-security.name}"
 }
-resource "azurerm_public_ip" "pipforlbtwo" {
-  name                         = "publicipforlbtwo"
-  location                     = "${var.location}"
-  public_ip_address_allocation = "static"
-  resource_group_name   = "${azurerm_resource_group.deep-security.name}"
-}
-resource "azurerm_public_ip" "pipforlbthree" {
-  name                         = "publicipforlbthree"
-  location                     = "${var.location}"
-  public_ip_address_allocation = "static"
-  resource_group_name   = "${azurerm_resource_group.deep-security.name}"
-}

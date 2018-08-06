@@ -20,6 +20,8 @@ resource "azurerm_network_interface" "app1" {
     name                          = "${var.resource_group_name}-ipconfig-app1"
     subnet_id                     = "${azurerm_subnet.subnet_2.id}"
     private_ip_address_allocation = "Dynamic"
+    load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.backend_pool1.id}"]
+    load_balancer_inbound_nat_rules_ids     = ["${(azurerm_lb_nat_rule.tcp.0.id)}"] 
   }
 }
 
@@ -32,6 +34,8 @@ resource "azurerm_network_interface" "app2" {
     name                          = "${var.resource_group_name}-ipconfig-app2"
     subnet_id                     = "${azurerm_subnet.subnet_2.id}"
     private_ip_address_allocation = "Dynamic"
+    load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.backend_pool1.id}"]
+    load_balancer_inbound_nat_rules_ids     = ["${(azurerm_lb_nat_rule.tcp.1.id)}"]
   }
 }
 
@@ -44,6 +48,8 @@ resource "azurerm_network_interface" "db1" {
     name                          = "${var.resource_group_name}-ipconfig-db1"
     subnet_id                     = "${azurerm_subnet.subnet_3.id}"
     private_ip_address_allocation = "Dynamic"
+    load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.backend_pool1.id}"]
+    load_balancer_inbound_nat_rules_ids     = ["${(azurerm_lb_nat_rule.tcp.2.id)}"]
   }
 }
 
@@ -56,39 +62,8 @@ resource "azurerm_network_interface" "db2" {
     name                          = "${var.resource_group_name}-ipconfig-db2"
     subnet_id                     = "${azurerm_subnet.subnet_3.id}"
     private_ip_address_allocation = "Dynamic"
+    load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.backend_pool1.id}"]
+    load_balancer_inbound_nat_rules_ids     = ["${(azurerm_lb_nat_rule.tcp.3.id)}"]
   }
 }
 
-resource "azurerm_network_interface" "lbone" {
-  name                  = "lbone"
-  location              = "${var.location}"
-  resource_group_name   = "${azurerm_resource_group.deep-security.name}"
-
-  ip_configuration {
-    name                          = "lbone"
-    subnet_id                     = "${azurerm_subnet.subnet_3.id}"
-    private_ip_address_allocation = "Dynamic"
-  }
-}
-resource "azurerm_network_interface" "lbtwo" {
-  name                  = "lbtwo"
-  location              = "${var.location}"
-  resource_group_name   = "${azurerm_resource_group.deep-security.name}"
-
-  ip_configuration {
-    name                          = "lbtwo"
-    subnet_id                     = "${azurerm_subnet.subnet_3.id}"
-    private_ip_address_allocation = "Dynamic"
-  }
-}
-resource "azurerm_network_interface" "lbthree" {
-  name                  = "lbthree"
-  location              = "${var.location}"
-  resource_group_name   = "${azurerm_resource_group.deep-security.name}"
-
-  ip_configuration {
-    name                          = "lbthree"
-    subnet_id                     = "${azurerm_subnet.subnet_3.id}"
-    private_ip_address_allocation = "Dynamic"
-  }
-}

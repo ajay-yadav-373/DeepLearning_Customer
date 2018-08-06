@@ -2,6 +2,7 @@ resource "azurerm_virtual_machine" "AppServer1" {
   name                  = "${var.resource_group_name_2}-App1"
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.deep-security.name}"
+  availability_set_id   = "${azurerm_availability_set.aset1.id}"
   network_interface_ids = ["${azurerm_network_interface.app1.id}"]
   vm_size               = "Standard_B1s"
 
@@ -40,6 +41,7 @@ resource "azurerm_virtual_machine" "AppServer2" {
   name                  = "${var.resource_group_name_2}-App2"
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.deep-security.name}"
+  availability_set_id   = "${azurerm_availability_set.aset1.id}"
   network_interface_ids = ["${azurerm_network_interface.app2.id}"]
   vm_size               = "Standard_B1s"
 
